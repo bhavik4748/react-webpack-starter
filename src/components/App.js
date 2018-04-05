@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 
 class Button extends Component {
   // state = { counter: 0 }; 
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  };
 
+  handleClick() {
+    this.props.onClickFunction(this.props.incrementValue);
+  };
 
   render() {
     return (
-      <button onClick={this.props.onClickFunction}> +1 </button>
+      <button onClick={this.handleClick}>
+        +{this.props.incrementValue}
+      </button>
     );
   };
 }
@@ -37,16 +46,19 @@ class App extends Component {
   };
 
 
-  incrementCounter() {
+  incrementCounter(incrementValue) {
     this.setState((prevState) => ({
-      counter: prevState.counter + 1
+      counter: prevState.counter + incrementValue
     }));
   }
 
   render() {
     return (
       <div >
-        <Button onClickFunction={this.incrementCounter} />
+        <Button incrementValue={1} onClickFunction={this.incrementCounter} />
+        <Button incrementValue={5} onClickFunction={this.incrementCounter} />
+        <Button incrementValue={10} onClickFunction={this.incrementCounter} />
+        <Button incrementValue={100} onClickFunction={this.incrementCounter} />
         <Result counter={this.state.counter} />
       </div >
     );
