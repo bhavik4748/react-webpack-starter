@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 
 
 const Stars = function (props) {
+    const numberOfStars = 1 + Math.floor(Math.random() * 9);
+    let stars = [];
+    for (let i = 0; i < numberOfStars; ++i) {
+        stars.push(<i key={i} className="fa fa-star"  ></i>);
+    }
     return (
         <div className="col-5">
-            <i className="fa fa-star"></i>
-            <i className="fa fa-star"></i>
-            <i className="fa fa-star"></i>
-            <i className="fa fa-star"></i>
+            {stars}
         </div>
     );
 }
@@ -28,6 +30,19 @@ const Answer = function (props) {
     );
 }
 
+
+const Numbers = function (props) {
+    return (
+        <div className="card text-center">
+            <div>
+                <span>1</span>
+                <span className="selected">2</span>
+                <span className="used">3</span>
+            </div>
+        </div>
+    );
+}
+
 class Game extends Component {
     render() {
         return (
@@ -39,6 +54,8 @@ class Game extends Component {
                     <Button />
                     <Answer />
                 </div>
+                <br />
+                <Numbers />
             </div>
         )
     }
